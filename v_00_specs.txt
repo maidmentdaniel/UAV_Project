@@ -1,0 +1,5 @@
+v_00
+
+Wings: 	300mm x 1300mm
+	Ailerons:	40mm x 1000mm
+	Spars:	1300mm x 25mm

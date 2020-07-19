@@ -1,0 +1,1118 @@
+
+% Default to the notebook output style
+
+
+% Inherit from the specified cell style.
+
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+    \usepackage{listings} % Used to define pretty listings for code sections [jfb]
+    \usepackage{float}   
+
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    
+\title{ }
+
+    
+    
+\author{J.-F. Bercher}
+
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+    breaklinks=true, % so long urls are correctly broken across lines
+	pdftitle={\@title},
+	pdfauthor={\@author},
+	colorlinks=true, % color links 
+	breaklinks=true, % enable to break long links
+	urlcolor= blue,  % color for external links
+	linkcolor= blue, % color for external links
+	citecolor=blue,  
+	bookmarksopen=false,
+	pdftoolbar=false,
+	pdfmenubar=false,
+%      hidelinks
+      }
+    % Slightly bigger margins than the latex defaults
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    %listings configuration
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+	\lstset{
+language=Python,
+commentstyle=\color{mygreen},
+keywordstyle=\color{blue},
+stringstyle=\color{mymauve},
+xleftmargin= 1cm,
+xrightmargin= 1cm,
+showstringspaces=false,
+	   breaklines=true,
+	   texcl=false,
+%	   basicstyle=\ttfamily,
+frame=single,
+frameround=tttt,
+framesep=10pt,
+%framexleftmargin=10pt,
+%framexrightmargin =10pt,
+%frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY} 
+        inputencoding=utf8,
+        extendedchars=true,
+        literate=%
+        {é}{{\'{e}}}1
+        {è}{{\`{e}}}1
+        {ê}{{\^{e}}}1
+        {ë}{{\¨{e}}}1
+        {É}{{\'{E}}}1
+        {Ê}{{\^{E}}}1
+        {û}{{\^{u}}}1
+        {ù}{{\`{u}}}1
+        {à}{{\`{a}}}1
+        {ç}{{\c{c}}}1
+        {Ç}{{\c{C}}}1
+        {î}{{\^{i}}}1
+        {Î}{{\^{I}}}1
+}
+
+
+%\usepackage{foo}
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+\tableofcontents
+
+    
+
+
+    
+    \hypertarget{wing-modeling}{%
+\section{Wing modeling}\label{wing-modeling}}
+
+    \hypertarget{naca-airfoils}{%
+\subsection{NACA Airfoils}\label{naca-airfoils}}
+
+    \hypertarget{symmetrical-4-digit-naca-foil}{%
+\subsubsection{Symmetrical 4-digit NACA
+foil}\label{symmetrical-4-digit-naca-foil}}
+
+The formula for the shape of a NACA 00xx foil, with ``x'' being replaced
+by the percentage of thickness to chord, is:
+\begin{equation}\label{eq:series4sym_yt}
+    \begin{aligned}
+        y_{t}=5t\,\left[0.2969{\sqrt {x}}-0.1260x-0.3516x^{2}+0.2843x^{3}-0.1015x^{4}\right]
+    \end{aligned}
+\end{equation} * \(x\) is the position along the chord from 0 to 1.00,
+(0 to 100%)
+* \(y_{t}\) is the half thickness at a given value of
+x (centerline to surface), and * \(t\) is the maximum thickness as a
+fraction of the chord (so t gives the last two digits in the NACA
+4-digit denomination divided by 100).
+%
+\begin{lstlisting}
+#NACA 4-digit airfoil generator function
+from jupyter_code_template import *
+def gen_NACA(series = [6, 4, 12], N = 1000):
+    """
+        series is a list [a,b,x]
+        -a = 100*m is the maximum camber,
+        -b = 100*p is the location of maximum camber,
+        -t = x/100 is the maximum thickness as a fraction of the chord
+        -N is the number of x coordinates in total
+        
+        returns: N, x, y_c , y_U, y_L
+        -N is the length of X
+        -x is the x coordinate array
+        -y_c is the mean camber line
+        -y_U is the upper edge coorndinate array
+        -y_L is the lower edge coordinate array
+        
+        Notes:
+        -If a = 0 OR b = 0, then the foil is assumed to be symmertical 
+        - in this case y_c is set to None
+    """
+    x = np.linspace(0, 1, N, endpoint=True)
+    m = series[0]/100
+    p = series[1]/10
+    t = series[2]/100
+    c = 1
+
+    y_t = 5*t*(0.2969*sqrt(x)-0.1260*x-0.3516*x**2+0.2844*x**3-0.1015*x**4)
+    
+    if(m == 0 or p == 0):
+        print("symmetric")
+        return N, x, None, y_t, -1*y_t
+    else:
+        print("cambered")
+        y_c = np.zeros(N)
+        y_c[0:int(p*N)] = (m/p**2)*(2*p*(x[0:int(p*N)]/c)-(x[0:int(p*N)]/c)**2)
+        y_c[int(p*N):] = (m/(1-p)**2)*((1-2*p)+2*p*(x[int(p*N):]/c)-(x[int(p*N):]/c)**2)
+
+        dy_c = np.zeros(N)
+        dy_c[0:int(p*N)] = (m/p**2)*(p-(x[0:int(p*N)]/c))
+        dy_c[int(p*N):] = (m/(1-p)**2)*(p-(x[int(p*N):]/c))
+
+        theta = np.arctan(dy_c)
+
+        # x_U = x-y_t*sin(theta)
+        # x_L= x+y_t*sin(theta)
+        y_U = y_c+y_t*cos(theta)
+        y_L = y_c-y_t*cos(theta)
+    
+        return N, x, y_c, y_U, y_L
+
+def cambered_foil_plt(fig, ax, N, x, y_c, y_U, y_L, NACA):
+    NACA_str = ''.join(map(str, NACA))
+    ax = config_axis(ax, x_lim = (0, 1), Eng = False)
+
+    ax.plot(x, y_c, label =  "Mean camber line: "+r"$y_c$")
+    ax.plot(x, y_U, label = "Upper edge: " + r"$y_U$")
+    ax.plot(x, y_L, label = "Lower edge: " + r"$y_L$")
+    ax.fill_between(x, y_U, y_L, facecolor = "grey", alpha = 0.4, label = "Foil section")
+
+    ax.legend(loc = "upper left", bbox_to_anchor = (1, 1))
+    figcaption("Cambered 4-digit NACA " + NACA_str +" airfoil", label="fig:series4cam")
+    plt.show()
+    
+def symmetric_foil_plt(fig, ax, N, x, y_c, y_U, y_L, NACA):
+    NACA_str = ''.join(map(str, NACA))
+    
+    ax = config_axis(ax, x_lim = (0, 1), Eng = False)
+    ax.plot(x, y_U, label = "Upper edge: " + r"$y_U$")
+    ax.plot(x, y_L, label = "Lower edge: " + r"$y_L$")
+    ax.fill_between(x, y_U, y_L, facecolor = "grey", alpha = 0.4, label = "Foil section")
+    ax.legend(loc = "upper left", bbox_to_anchor = (1, 1))
+    figcaption("Symmetric 4-digit NACA " + NACA_str +" airfoil", label="fig:series4sym")
+    plt.show()
+
+def xfoil_foilgen(series = [6, 4, 12], N = 100):
+    """
+        Takes in a 4-digit NACA code, and number of data points,
+        it then generates the corresponding x and y cooridinates
+        for use in XFOIL
+    """
+    N, x_i, y_c, y_U_i, y_L_i = gen_NACA(series, N = N)
+    
+    x_U = x_i[::-1]
+    x_L = x_i
+    x = np.concatenate((x_U, x_L))
+    
+    y_U = y_U_i[::-1]
+    y_L = y_L_i
+    y = np.concatenate((y_U, y_L))
+    N = len(x)
+    return N, x, y
+\end{lstlisting}%
+\begin{lstlisting}
+from jupyter_code_template import *
+NACA = [0, 0, 12]
+NACA_str = ''.join(map(str, NACA))
+N = 1000
+N, x, y_c, y_U, y_L = gen_NACA(series=NACA, N = N)
+
+fig1, ax1 = plt.subplots(1, 1, figsize = (12, 3))
+symmetric_foil_plt(fig1, ax1, N, x, y_c, y_U, y_L, NACA)
+\end{lstlisting}%
+    \begin{Verbatim}[commandchars=\\\{\}]
+symmetric
+
+    \end{Verbatim}
+
+    
+    
+
+    
+    
+    
+    
+\begin{figure}
+    \begin{center}
+        \adjustimage{max size={0.7\linewidth}{0.3\paperheight}}{UAV_Design_files/UAV_Design_4_3.png}
+    \end{center}
+    \caption{Symmetric 4-digit NACA 0012 airfoil}      
+    \label{fig:series4sym}
+\end{figure}
+    
+    \hypertarget{cambered-4-digit-naca-foil}{%
+\subsubsection{Cambered 4-digit NACA
+foil}\label{cambered-4-digit-naca-foil}}
+
+The simplest asymmetric foils are the NACA 4-digit series foils, which
+use the same formula as that used to generate the 00xx symmetric foils,
+but with the line of mean camber bent. The formula used to calculate the
+mean camber line is:
+
+\begin{equation}\label{eq:series4cambered_yc}
+    \begin{aligned}
+        y_{c} =
+        \begin{cases}
+            \frac{m}{p^2}\left( 2p\left(\frac{x}{c}\right)-\left(\frac{x}{c}\right)^2 \right), & 0\leq x \leq pc\\
+            \frac{m}{(1-p)^2}\left( (1-2p)+2p\left( \frac{x}{c}\right)-\left(\frac{x}{c}\right)^2 \right), & pc \leq x \leq c\\
+        \end{cases}
+    \end{aligned}
+\end{equation} * \(m\) is the maximum camber (\(100 m\) is the first of
+the four digits), * \(p\) is the location of maximum camber (\(10 p\) is
+the second digit in the NACA xxxx description).
+
+For this cambered airfoil, because the thickness needs to be applied
+perpendicular to the camber line, the coordinates \((x_U,y_U)\) and
+\((x_L,y_L)\), of respectively the upper and lower airfoil surface,
+become: \begin{align}
+    x_U &= x-y_t \sin(\theta), & y_U &= y_c +y_t\cos(\theta)\\
+    x_L &= x+y_t \sin(\theta), & y_L &= y_c -y_t\cos(\theta)\\
+\end{align}, where \begin{equation}
+    \theta = \arctan\left(\frac{dy_c}{dx}\right)\\
+\end{equation} \begin{equation}
+    \begin{aligned}
+        \frac{dy_c}{dx} =
+        \begin{cases}
+            \frac{2m}{p^2} \left( p-\frac{x}{c}\right), & 0\leq x \leq pc\\
+            \frac{m}{(1-p)^2}\left( p-\frac{x}{c}\right), & pc \leq x \leq c\\
+        \end{cases}
+    \end{aligned}
+\end{equation}
+%
+\begin{lstlisting}
+from jupyter_code_template import *
+NACA = [4, 4, 12]
+N = 1000
+
+N, x, y_c, y_U, y_L = gen_NACA(series=NACA, N = N)
+
+fig2, ax2 = plt.subplots(1, 1, figsize = (12, 3))
+
+cambered_foil_plt(fig2, ax2, N, x, y_c, y_U, y_L, NACA)
+\end{lstlisting}%
+    
+    
+
+    
+    
+    
+    
+\begin{figure}
+    \begin{center}
+        \adjustimage{max size={0.7\linewidth}{0.3\paperheight}}{UAV_Design_files/UAV_Design_6_2.png}
+    \end{center}
+    \caption{Cambered 4-digit NACA 4412 airfoil}      
+    \label{fig:series4cam}
+\end{figure}
+    %
+\begin{lstlisting}
+from jupyter_code_template import *
+NACA = [4.5, 4, 12]
+N = 1000
+
+N, x, y_c, y_U, y_L = gen_NACA(series=NACA, N = N)
+
+fig2, ax2 = plt.subplots(1, 1, figsize = (12, 3))
+
+cambered_foil_plt(fig2, ax2, N, x, y_c, y_U, y_L, NACA)
+\end{lstlisting}%
+    \begin{Verbatim}[commandchars=\\\{\}]
+cambered
+
+    \end{Verbatim}
+
+    
+    
+
+    
+    
+    
+    
+\begin{figure}
+    \begin{center}
+        \adjustimage{max size={0.7\linewidth}{0.3\paperheight}}{UAV_Design_files/UAV_Design_7_3.png}
+    \end{center}
+    \caption{Cambered 4-digit NACA 4.5412 airfoil}      
+    \label{fig:series4cam}
+\end{figure}
+    %
+\begin{lstlisting}
+N, x, y = xfoil_foilgen(series = [0, 0, 12], N = 160)
+fig, ax = plt.subplots(1, 1, figsize = (12, 3))
+ax = config_axis(ax, Eng = False)
+
+x1 = x[int(N/2):]
+y_U = y[:int(N/2)]
+y_U = y_U[::-1]
+y_L = y[int(N/2):]
+
+ax.plot(x1, y_U, label = "Upper edge: " + r"$y_U$")
+ax.plot(x1, y_L, label = "Lower edge: " + r"$y_L$")
+ax.fill_between(x1, y_U, y_L, facecolor = "grey", alpha = 0.4, label = "Foil section")
+ax.legend(loc = "upper left", bbox_to_anchor = (1, 1))
+plt.show()
+\end{lstlisting}%
+    \begin{Verbatim}[commandchars=\\\{\}]
+symmetric
+
+    \end{Verbatim}
+
+    
+\begin{figure}
+    \begin{center}
+        \adjustimage{max size={0.7\linewidth}{0.3\paperheight}}{UAV_Design_files/UAV_Design_8_1.png}
+    \end{center}
+\end{figure}
+    
+    \hypertarget{digit-naca}{%
+\subsubsection{5-digit NACA}\label{digit-naca}}
+
+    \hypertarget{aeropy}{%
+\subsection{AeroPy}\label{aeropy}}
+%
+\begin{lstlisting}
+import aeropy.xfoil_module as xf
+# xf.find_coefficients('naca0015', 5)
+NACA = [4, 4, 12]
+NACA_str = 'naca'+''.join(map(str, NACA))
+# N, x, y_c, y_U, y_L = gen_NACA(NACA)
+# filename = xf.file_name(NACA_str,  alfas=5, output = 'Polar')
+# print(filename)
+# xf.create_input(x, y_U, y_L, filename, True)
+print(xf.find_coefficients('24112',5,10e4))
+# xf.call(NACA_str, 5, 'Coordinates',  10e4, 0, False)
+\end{lstlisting}%
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        FileNotFoundError                         Traceback (most recent call last)
+
+        <ipython-input-3-b671d600c635> in <module>
+          7 \# print(filename)
+          8 \# xf.create\_input(x, y\_U, y\_L, filename, True)
+    ----> 9 print(xf.find\_coefficients('24112',5,10e4))
+         10 \# xf.call(NACA\_str, 5, 'Coordinates',  10e4, 0, False)
+    
+
+        C:\textbackslash{}Users\textbackslash{}Purco\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}aeropy\textbackslash{}xfoil\_module.py in find\_coefficients(airfoil, alpha, Reynolds, iteration, NACA, delete, PANE, GDES)
+        950     coefficients = \{\}
+        951     \# Data from file
+    --> 952     Data = output\_reader(filename, output='Polar', delete=False)
+        953     for key in Data:
+        954         try:
+    
+
+        C:\textbackslash{}Users\textbackslash{}Purco\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}aeropy\textbackslash{}xfoil\_module.py in output\_reader(filename, separator, output, rows\_to\_skip, header, delete, structure, type\_structure)
+        665         separator\_list = separator
+        666     structure\_count = 0
+    --> 667     with open(filename, "r") as myfile:
+        668         \# Jump first lines which are useless
+        669         for line in myfile:
+    
+
+        FileNotFoundError: [Errno 2] No such file or directory: 'Polar\_24112\_0500\_0500'
+
+    \end{Verbatim}
+
+    \hypertarget{uav-design-ideas}{%
+\subsection{UAV design ideas}\label{uav-design-ideas}}
+
+\begin{itemize}
+\tightlist
+\item
+  Foam structure
+\item
+  Skin
+\item
+  Mould for rapid deployment
+
+  \begin{itemize}
+  \tightlist
+  \item
+    JIG for foam cutting instead?
+  \end{itemize}
+\item
+  Pixhawk brain
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Definitely --\textgreater{} I shoud probably source one
+  \end{itemize}
+\item
+  AI autopilot
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Long term goal, integrate with pixahawk
+  \end{itemize}
+\item
+  Predefined wiring harness
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Obviously
+  \end{itemize}
+\item
+  Parachute for landing
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Yes
+  \end{itemize}
+\item
+  Sled takeoff
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Yes
+  \item
+    Compressed air?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Not right now.
+    \end{itemize}
+  \item
+    Elastic bands seem better.
+  \item
+    VTOL sled? Seems cool, why not?
+  \end{itemize}
+\item
+  Design challenge:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Design for scaling
+  \item
+    Rapid prototyping
+  \item
+    Rapid deployment
+  \item
+    Minimal moving parts
+  \end{itemize}
+\item
+  Pitch control
+\item
+  Torque vectoring for pitch control
+\item
+  Tail surface?
+\item
+  Linear motor over centre of gravity
+\item
+  Up-cambered wings
+\item
+  Reaper and Predator drones really caught my eye. These were basically
+  just glider wings, set back on the fuselage to counter the weight of
+  the camera equipment and sensors in the nose. The anhedral tail
+  surfaces on the Predator are intended to assist in the prevention of
+  prop-strike during take-off and landing -- plus they look cool.
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  Air time: 10\textasciitilde{}min
+\item
+  SDR \& GPU-Jetson
+
+  \begin{itemize}
+  \tightlist
+  \item
+    15 W to 20 W (achievable)
+  \end{itemize}
+\item
+  GPS
+\item
+  Mini-airship
+\item
+  Does it need to move a distance
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tethering is difficult
+  \item
+    Yes we want it to move
+  \end{itemize}
+\item
+  Low transmission power in RF, 100 mW cap (to be revised)
+\item
+  Try to get better power consumption estimates
+
+  \begin{itemize}
+  \tightlist
+  \item
+    best GPU?
+  \item
+    radar
+  \item
+    SDR
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{jamming-system-uav-requirements}{%
+\section{Jamming System UAV
+Requirements}\label{jamming-system-uav-requirements}}
+
+\textbf{2019/02/28}
+
+\begin{itemize}
+\tightlist
+\item
+  SDR Type: Nuand BladeRF 2.0
+\item
+  SDR Dimensions: 12 cm (17 cm with amplifiers) x 8 cm x 2.5 cm
+\item
+  SDR Power:(5 V ; 1 A) \(\implies\) 5 .0 W
+\item
+  SDR External Amplifier Power:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    2 x PA: (2 x 0.3 W) \(\implies\) 0.6 W
+  \item
+    2 x LNA: (2 x 0.45 W) \(\implies\) 0.9 W
+  \end{itemize}
+\item
+  Jammer Wingspan Requirements: 2.5 m
+\item
+  SDR Mass (with amplifiers and cover): 350 g
+\item
+  Odroid Processor Power \(\implies\) 20 W
+\item
+  Odroid Dimensions: 7 cm x 9 cm x 3 cm
+\item
+  Odroid Weight: 100 g
+\item
+  RG-58 Coaxial Cable: 37 g / m
+\end{itemize}
+
+    \hypertarget{rietfontein-anti-poaching}{%
+\subsection{Rietfontein Anti-poaching}\label{rietfontein-anti-poaching}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Rietfontein Anti-poaching
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Need a drone.
+  \item
+    We can test at the Rietfontein
+  \item
+    We need to get specs
+  \item
+    Circumference of 30 km
+  \item
+    Diameter of 8 km
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{design-requirements}{%
+\subsection{Design requirements}\label{design-requirements}}
+
+\begin{itemize}
+\tightlist
+\item
+  UAV wing tips
+\item
+  Reflexed Wing tips
+\item
+  Fibre glass manufacturing don't so small jobs
+\item
+  They also don't
+\end{itemize}
+
+    \hypertarget{build-techniques}{%
+\subsection{Build Techniques}\label{build-techniques}}
+
+\begin{itemize}
+\tightlist
+\item
+  Balsa
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hard to build
+  \item
+    Fragile
+  \item
+    Hard to repair
+  \end{itemize}
+\item
+  Folded foam board
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Quick cheap and easy
+  \item
+    Not much in the way of accuracy
+  \end{itemize}
+\item
+  Coragated platic board
+
+  \begin{itemize}
+  \tightlist
+  \item
+    indestrutable
+  \item
+    inaccurate
+  \end{itemize}
+\item
+  Foam board
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hot wire cutter
+  \item
+    really fragile
+
+    \begin{itemize}
+    \tightlist
+    \item
+      packing tape
+    \item
+      laminate sheet
+    \item
+      fibre glass onto foam (promising)
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{tutorials}{%
+\subsection{Tutorials}\label{tutorials}}
+
+\begin{itemize}
+\tightlist
+\item
+  https://www.instructables.com/id/Black-Eagle-aerial-mapping-UAV/
+\item
+  https://www.youtube.com/watch?v=Xafg-o83L94
+\item
+  https://www.robotshop.com/community/tutorials/show/how-to-make-a-drone-uav-lesson-8-airplanes
+\end{itemize}
+
+    \hypertarget{genetic-algorithm-implementation}{%
+\subsection{Genetic Algorithm
+implementation}\label{genetic-algorithm-implementation}}
+
+    \hypertarget{basic-ga-tutorial}{%
+\subsubsection{Basic GA tutorial}\label{basic-ga-tutorial}}
+
+\begin{itemize}
+\tightlist
+\item
+  https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6
+  \cite{gad_genetic_2018}
+\end{itemize}
+%
+\begin{lstlisting}
+def cal_pop_fitness(equation_inputs, pop):
+     # Calculating the fitness value of each solution in the current population.
+     # The fitness function calculates the sum of products between each input
+     # and its corresponding weight.
+     fitness = np.sum(pop*equation_inputs, axis=1)
+     return fitness
+
+def select_mating_pool(pop, fitness, num_parents):
+
+    # Selecting the best individuals in the current generation as parents
+    # for producing the offspring of the next generation.
+
+    #generate empty parent population array
+    parents = np.empty((num_parents, pop.shape[1]))
+
+    #iterate through the number of parents
+    for parent_num in range(num_parents):
+        #find which memper had max fitness
+        max_fitness_idx = np.where(fitness == np.max(fitness))
+        max_fitness_idx = max_fitness_idx[0][0]
+
+        #choose the individual from the previous population with the maximum
+        #fitness to be a parent for the next generation.
+        parents[parent_num, :] = pop[max_fitness_idx, :]
+
+        #set the current maximum fitness to be some small value so that on the
+        #next iteration of the loop the next best individual will be selected
+        #i.e. take this one out of the running
+        fitness[max_fitness_idx] = -99999999999
+    return parents
+
+def crossover(parents, offspring_size):
+
+    offspring = np.empty(offspring_size)
+    # The point at which crossover takes place between two parents.
+    #Usually, it is at the center.
+    crossover_point = int(offspring_size[1]/2)
+
+    for k in range(offspring_size[0]):
+        # Index of the first parent to mate.
+        parent1_idx = k%parents.shape[0]
+        # Index of the second parent to mate.
+        parent2_idx = (k+1)%parents.shape[0]
+        # The new offspring will have its first half of its genes taken from the first parent.
+        offspring[k, 0:crossover_point] = parents[parent1_idx, 0:crossover_point]
+        # The new offspring will have its second half of its genes taken from the second parent.
+        offspring[k, crossover_point:] = parents[parent2_idx, crossover_point:]
+    return offspring
+
+def mutation(offspring_crossover):
+
+    # Mutation changes a single gene in each offspring randomly.
+
+    for idx in range(offspring_crossover.shape[0]):
+
+        # The random value to be added to the gene.
+
+        random_value = np.random.uniform(-1.0, 1.0, 1)
+
+        offspring_crossover[idx, 4] = offspring_crossover[idx, 4] + random_value
+
+    return offspring_crossover
+\end{lstlisting}%
+\begin{lstlisting}
+from jupyter_code_template import *
+
+#Inputs to the function to be minimised
+equation_inputs = [4,-2,3.5,5,-11,-4.7]
+
+#parameters to be optimised
+N_w = len(equation_inputs)
+
+#the number of individuals in a population
+N_ind = 8
+
+#the population shape
+pop_shape = (N_ind, N_w)
+
+#seed the population
+new_pop = np.random.uniform(-4.0, 4.0, size = pop_shape)
+
+#the number of generations
+N_gen = 10
+new_parents_mating = 4
+fit_arr = []
+for gen in range(N_gen):
+    fitness = cal_pop_fitness(equation_inputs, new_pop)
+    parents = select_mating_pool(new_pop, fitness, new_parents_mating)
+    offspring_crossover = crossover(parents, offspring_size = (pop_shape[0]-parents.shape[0], N_w))
+    offspring_mutation = mutation(offspring_crossover)
+    new_pop[0:parents.shape[0], :] = parents
+    new_pop[parents.shape[0]:, :] = offspring_mutation
+    fit = max(sum(new_pop*equation_inputs, axis=1))
+    fit_arr = np.append(fit_arr, fit)
+
+# Getting the best solution after iterating finishing all generations.
+#At first, the fitness is calculated for each solution in the final generation.
+fitness = cal_pop_fitness(equation_inputs, new_pop)
+# Then return the index of that solution corresponding to the best fitness.
+best_match_idx = np.where(fitness == max(fitness))
+
+print("Best solution : ", new_pop[best_match_idx, :])
+print("Best solution fitness : ", fitness[best_match_idx])
+
+fig, ax = plt.subplots(1, 1, figsize = (12, 3))
+ax = config_axis(ax, Eng = False)
+ax.plot(fit_arr)
+plt.show()
+\end{lstlisting}%
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best solution :  [[[ 3.17667176 -0.35600885  1.92396877  2.49634592 -6.41061891
+   -2.64615371]]]
+Best solution fitness :  [115.58805545]
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<Figure size 3600x900 with 1 Axes>
+    \end{verbatim}
+
+    
+    \hypertarget{naive-ga-with-aeropy}{%
+\subsubsection{Naive GA with aeropy}\label{naive-ga-with-aeropy}}
+%
+\begin{lstlisting}
+from jupyter_code_template import *
+from numpy.random import randint
+np.random.seed(20190321)
+
+N_ind = 10
+N_params = 3
+pop = np.empty((N_ind, 3), int)
+#seed population
+for i in range(N_ind):
+    pop[i, :] = [randint(0, 7, None, int), randint(0, 7, None, int), randint(10, 20, None, int)]
+
+\end{lstlisting}%
+    
+    
+    \begin{verbatim}
+array([[ 6,  3, 19],
+       [ 2,  2, 18],
+       [ 4,  2, 16],
+       [ 1,  0, 18],
+       [ 2,  3, 15],
+       [ 5,  1, 17],
+       [ 0,  6, 15],
+       [ 0,  1, 17],
+       [ 3,  4, 15],
+       [ 4,  6, 17]])
+    \end{verbatim}
+
+    
+
+    \hypertarget{references}{%
+\end{document}
